@@ -1,10 +1,5 @@
 pipeline {
     agent any
-
-     tools {
-        nodejs 'NodeJSInstall'
-        dockerTool 'dockerInstall'
-    }
     stages {
         stage('Checkout') {
             steps {
@@ -25,14 +20,6 @@ pipeline {
                         }
                     }
                 }
-        
-                // stage('Run Docker Image') {
-                //     steps {
-                //         script {
-                //             bat 'docker run -p 3000:3000 my-image:%BUILD_ID%'
-                //         }
-                //     }
-                // }
         
                 stage('Push Docker Image') {
                     steps {
