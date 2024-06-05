@@ -1,0 +1,58 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mongo-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app
+  template:
+    metadata:
+      labels:
+        app: app
+    spec:
+      containers:
+      - name: mongo
+        image: mongo
+        volumeMounts:
+        - name: mongo-storage
+          mountPath: /data/db
+        ports:
+        - containerPort: 27017
+      - name: finalexam-eventbus
+        image: malaikaz/final-exam:eventBus
+        ports:
+        - containerPort: 4009
+      - name: final-exam-auth
+        image: malaikaz/final-exam:Auth
+        ports:
+        - containerPort: 4000
+      - name: final-exam-post
+        image: malaikaz/final-exam:Post
+        ports:
+        - containerPort: 4002
+      - name: final-exam-client
+        image: malaikaz/final-exam:client
+        ports:
+        - containerPort: 3110
+      - name: final-exam-classrooms
+        image: malaikaz/final-exam:Classrooms
+        ports:
+        - containerPort: 4001
+      volumes:
+      - name: mongo-storage
+        persistentVolumeClaim:
+          claimName: mongo-pvc
