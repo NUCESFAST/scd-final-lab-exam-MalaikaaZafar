@@ -1,0 +1,53 @@
+version: '3'
+services:
+  mongodb:
+    image: mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - mongodb_data:/data/db
+
+  Auth:
+    build: ./Auth
+    image: malaikaz/final-exam:Auth
+    ports:
+      - 8081:1110
+    volumes:
+      - ./Auth:/Auth
+
+  Classrooms:
+    build: ./Classrooms
+    image: malaikaz/final-exam:Classrooms
+    ports:
+      - 8082:1110
+    volumes:
+      - ./Classrooms:/Classrooms
+  
+  eventBus:
+    build: ./event-bus
+    image: malaikaz/final-exam:eventBus
+    ports:
+      - 8083:1110
+    volumes:
+      - ./event-bus:/event-bus
+
+  Post:
+    build: ./Post
+    image: malaikaz/final-exam:Post
+    ports:
+      - 8084:1110
+    volumes:
+      - ./Post:/Post
+
+  client:
+    build: ./client
+    image: malaikaz/final-exam:client
+    ports:
+      - 8085:3110
+    volumes:
+      - ./client:/client
+
+volumes:
+  mongodb_data: {}
+
+ 
