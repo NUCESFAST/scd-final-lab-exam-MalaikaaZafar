@@ -37,7 +37,7 @@ pipeline {
         
                 stage('Push Docker Image') {
                     steps {
-                        withCredentials([usernamePassword(credentialsId: 'docker-hub-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                        withCredentials([usernamePassword(credentialsId: 'dfce01d0-1003-41f6-9e3c-965f103e5b23', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                             bat 'docker login -u %DOCKER_USER% -p %DOCKER_PASS% https://registry.hub.docker.com'
                             bat 'docker-compose push'
                         }
