@@ -1,13 +1,13 @@
 pipeline {
     agent any
     stages {
-        stage('Checkout') {
+        stage('i211110Checkouti211110') {
             steps {
                 git 'https://github.com/NUCESFAST/scd-final-lab-exam-MalaikaaZafar'
             }
         }
 
-        stage('Install Dependencies') {
+        stage('i211110 Install Dependencies i211110') {
             steps {
                    dir('./Auth') {
                     bat 'npm install'
@@ -27,7 +27,7 @@ pipeline {
             }
         }
 
-                stage('Build Docker Image') {
+                stage('i211110Build Docker Imagei211110') {
                     steps {
                         script {
                             bat 'docker-compose build'
@@ -35,7 +35,7 @@ pipeline {
                     }
                 }
         
-                stage('Push Docker Image') {
+                stage('i211110Push Docker Imagei211110') {
                     steps {
                         withCredentials([usernamePassword(credentialsId: 'dfce01d0-1003-41f6-9e3c-965f103e5b23', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
                             bat 'docker login -u %DOCKER_USER% -p %DOCKER_PASS% https://registry.hub.docker.com'
