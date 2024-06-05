@@ -9,7 +9,21 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                bat 'npm install'
+                   dir('/Auth') {
+                    bat 'npm install'
+                }
+                    dir('/Post'){
+                        bat 'npm install'
+                    }
+                    dir('/Classrooms'){
+                        bat 'npm install'
+                    }
+                    dir('/event-bus'){
+                        bat 'npm install'
+                    }
+                    dir('/client'){
+                        bat 'npm install'
+                    }
             }
         }
 
